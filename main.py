@@ -72,8 +72,8 @@ if __name__ == '__main__':
                 keyword = input("Введите ключевое слово для поиска: ")
                 insert_keyword(db.connection, db.cursor, keyword)
 
-                page = 1  # Начальная страница
-                results_per_page = 10  # Число результатов на странице
+                page = 1  # 1-я страница
+                results_per_page = 10  # Количество на 1 странице
                 # Вывод фильмов по ключевому слову
                 films_query = f"%{keyword}%"
                 found_results = False
@@ -120,8 +120,8 @@ if __name__ == '__main__':
                     if 1 <= genre_choice <= len(genre_list):
                         selected_genre = genre_list[genre_choice - 1]
 
-                        page = 1  # Начальная страница
-                        results_per_page = 10  # Число результатов на странице
+                        page = 1
+                        results_per_page = 10
 
                         while True:
                             offset = (page - 1) * results_per_page
@@ -155,8 +155,8 @@ if __name__ == '__main__':
                 # Поиск фильма по году
                 year = input("Введите год выпуска для поиска: ")
 
-                page = 1  # Начальная страница
-                results_per_page = 10  # Число результатов на странице
+                page = 1
+                results_per_page = 10
 
                 while True:
                     offset = (page - 1) * results_per_page
@@ -242,8 +242,8 @@ if __name__ == '__main__':
                 # Вывод популярных запросов
                 print("Популярные запросы:")
 
-                page = 1  # Начальная страница
-                results_per_page = 10  # Число результатов на странице
+                page = 1
+                results_per_page = 10
 
                 while True:
                     offset = (page - 1) * results_per_page

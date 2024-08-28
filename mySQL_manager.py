@@ -5,16 +5,15 @@ from query_templates import *
 
 class MixinMySQLQuery:
     def simple_select(self, query, value):
-        #if self.is_exist_table(get_film_genre_query, value):
 
-            try:
-                self.cursor.execute(query, (f"%{value}%",))
-                rows = self.cursor.fetchall()
-                return rows
+        try:
+            self.cursor.execute(query, (f"%{value}%",))
+            rows = self.cursor.fetchall()
+            return rows
 
-            except Exception as e:
-                print(f"{e.__class__.__name__}: {e}")
-                return []
+        except Exception as e:
+            print(f"{e.__class__.__name__}: {e}")
+            return []
 
     def is_exist_table(self, table_name) -> bool:
         try:
@@ -80,6 +79,4 @@ if __name__ == '__main__':
         is_exist = db.is_exist_table('non_existent_table')
         assert is_exist == False, "Error!"
 
-#print("Тесты успешно прошли!")
-
-
+# print("Тесты успешно прошли!")
