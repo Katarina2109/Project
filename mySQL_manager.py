@@ -29,6 +29,15 @@ class MixinMySQLQuery:
             print(f"{e.__class__.__name__}: {e}")
             return False
 
+    def execute_query(self, query, params=None):
+        try:
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
+        except Exception as e:
+            print(f"Ошибка запроса: {e}")
+
 
 class MySQLConnection(MixinMySQLQuery):
     def __init__(self, dbconfig):

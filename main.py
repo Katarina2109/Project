@@ -1,59 +1,12 @@
-import mysql.connector
 from prettytable import PrettyTable
-from local_settings import dbconfig
-from mySQL_manager import MySQLConnection
+from total_func import *
 from query_templates import *
-
-
-def execute_query(cursor, query, params=None):
-    try:
-        if params:
-            cursor.execute(query, params)
-        else:
-            cursor.execute(query)
-    except Exception as e:
-        print(f"Ошибка запроса: {e}")
-
-
-def fetch_results(cursor, query, params=None):
-    try:
-        execute_query(cursor, query, params)
-        return cursor.fetchall()
-    except Exception as e:
-        print(f"Ошибка при получении результата: {e}")
-        return []
-
-
-def insert_keyword(connection, cursor, keyword):
-    try:
-        # Выполнение запроса на вставку
-        cursor.execute(get_count_keywords_query, (keyword,))
-        connection.commit()
-        print(f"Ключевое слово '{keyword}' добавлено в таблицу.")
-
-    except mysql.connector.Error as err:
-        print(f"Ошибка при вставке ключевого слова: {err}")
-
-
-def show_popular_keywords(cursor):
-    try:
-        cursor.execute(get_popular_query)  # для получения популярных ключевых слов
-        results = cursor.fetchall()  # получаем все результаты запроса
-
-        if results:
-            for row in results:
-                print(f"Keyword: {row[0]}, Count: {row[1]}")
-        else:
-            print("Нет популярных запросов.")
-    except Exception as e:
-        print(f"Ошибка выполнения запроса: {e}")
-
 
 if __name__ == '__main__':
 
     with MySQLConnection(dbconfig) as db:
 
-        execute_query(db.cursor, get_table_keywords_query)
+        db.execute_query(get_table_keywords_query)
         db.connection.commit()  # сохранение изменений
 
         while True:

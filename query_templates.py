@@ -1,3 +1,9 @@
+s_query = """SELECT  title       
+             FROM film
+             WHERE title LIKE %s
+             LIMIT 10
+             ;"""
+
 get_films_by_keyword_query = """SELECT f.title, c.name AS genre, f.release_year
                                FROM film f
                                LEFT JOIN film_category fc ON f.film_id = fc.film_id
